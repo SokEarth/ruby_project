@@ -113,9 +113,6 @@ jobs:
       - name: Log in to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Create config/database.yml
-        working-directory: gifmachine
           
       - name: Build and push docker image to ecr
         working-directory: gifmachine
