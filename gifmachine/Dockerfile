@@ -19,6 +19,9 @@ RUN apk add --no-cache \
 # Set working directory
 WORKDIR /app
 
+# Copy Gemfile first
+COPY Gemfile Gemfile.lock ./
+
 # Install gems
 RUN bundle install
 
