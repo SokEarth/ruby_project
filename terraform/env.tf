@@ -9,12 +9,14 @@ resource "aws_secretsmanager_secret_version" "db" {
     password = aws_db_instance.postgres.password
     host = aws_db_instance.postgres.address
     database = aws_db_instance.postgres.db_name
-    db_url = format(
-      "postgres://%s:%s@%s:5432/%s",
-      aws_db_instance.postgres.username,
-      aws_db_instance.postgres.password,
-      aws_db_instance.postgres.address,
-      aws_db_instance.postgres.db_name
+    db_url = urlencode(
+      format(
+        "postgres://%s:%s@%s:5432/%s",
+        aws_db_instance.postgres.username,
+        aws_db_instance.postgres.password,
+        aws_db_instance.postgres.address,
+        aws_db_instance.postgres.db_name
+      )
     )
   })
 }
@@ -63,12 +65,12 @@ resource "aws_iam_role_policy_attachment" "attach_secret_policy" {
   policy_arn = aws_iam_policy.pod_secret_policy.arn
 }
 
-# resource "kubernetes_service_account" "app_sa" {
-#   metadata {
-#     name = "app-service-account"
-#     namespace = "default"
-#     annotations = {
-#       "eks.amazonaws.com/role-arn" = aws_iam_role.pod_secret_access.arn
-#     }
-#   }
-# }
+resource "kubernetes_service_account" "app_sa" {
+  metadata {
+    name = "app-service-account"
+    namespace = "default"
+    annotations = {
+      "eks.amazonaws.com/role-arn" = aws_iam_role.pod_secret_access.arn
+    }
+  }
+}
