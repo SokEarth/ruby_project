@@ -141,9 +141,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # - name: Get latest git short SHA
-      #   id: vars
-      #   run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      - name: Get latest git short SHA
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Update values.yaml with new tag
         working-directory: helm
