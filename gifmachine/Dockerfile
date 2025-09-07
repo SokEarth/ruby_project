@@ -19,8 +19,11 @@ RUN apk add --no-cache \
 # Set working directory
 WORKDIR /app
 
-# Copy Gemfile first
-COPY Gemfile ./
+# Copy Gemfile first (for layer caching)
+COPY Gemfile Gemfile.lock ./
+
+# Update websocket
+RUN rm Gemfile.lock
 
 # Install gems
 RUN bundle install
