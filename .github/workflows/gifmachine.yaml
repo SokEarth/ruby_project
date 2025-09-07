@@ -149,6 +149,7 @@ jobs:
           sed -i "s|tag:.*|tag: \"${{ steps.vars.outputs.sha_short }}\"|" values.yaml
 
       - name: Commit and push changes
+        working-directory: helm
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
