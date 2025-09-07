@@ -132,7 +132,7 @@ jobs:
   # Update Helm values with new image tag
   Update-helm:
     runs-on: ubuntu-latest
-    environment: helm
+    environment: helm/gifmachine
 
     steps:
       - name: Checkout repo
@@ -144,7 +144,6 @@ jobs:
 
       - name: Update values.yaml with new tag
         run: |
-          cd gifmachine
           sed -i "s|tag:.*|tag: \"${{ steps.vars.outputs.sha_short }}\"|" values.yaml
 
       - name: Commit and push changes
