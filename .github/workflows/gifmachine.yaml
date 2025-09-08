@@ -160,3 +160,15 @@ jobs:
           git add gifmachine/values.yaml
           git commit -m "chore: update image tag to ${{ steps.vars.outputs.sha_short }}" || echo "No changes"
           git push
+  
+  Smoke-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Smoke test app
+        run: |
+          echo "Running smoke test..."
+          curl -f http://a54f37dd10a9342b180c2fdceec0cb3d-274081527.eu-north-1.elb.amazonaws.com || exit 1
