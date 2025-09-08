@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "gifmachine.labels" . | nindent 4 }}
   namespace:
-    {{- include ".Values.namespace" . | nindent 4 }}
+    {{ .Values.namespace | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
