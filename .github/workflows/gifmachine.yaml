@@ -93,10 +93,10 @@ jobs:
         run: terraform plan -out=tfplan
         working-directory: terraform
 
-      # Terraform Apply
-      # - name: Terraform Apply
-      #   run: terraform apply -auto-approve tfplan
-      #   working-directory: terraform
+      Terraform Apply
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan
+        working-directory: terraform
 
   containerize:
     runs-on: ubuntu-latest
@@ -171,4 +171,4 @@ jobs:
       - name: Smoke test app
         run: |
           echo "Running smoke test..."
-          curl -f http://a54f37dd10a9342b180c2fdceec0cb3d-274081527.eu-north-1.elb.amazonaws.com || exit 1
+          curl -f http://a54f37dd10a9342b180c2fdceec0cb3d-274081527.eu-north-1.elb.amazonaws.com || grep -q "gifmachine"
