@@ -58,21 +58,21 @@ securityContext: {}
 # This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
 service: 
   enabled: false
-  # # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
-  # type: ClusterIP
-  # # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
-  # port: 
+  # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+  type: ClusterIP
+  # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+  port: 
 
 livenessProbe:
   enabled: false
-  # httpGet:
-  #   path: /
-  #   port: http
+  httpGet:
+    path: /
+    port: http
 readinessProbe:
   enabled: false
-  # httpGet:
-  #   path: /
-  #   port: http
+  httpGet:
+    path: /
+    port: http
 
 # This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
 autoscaling:
@@ -83,7 +83,7 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 # Additional volumes on the output Deployment definition.
-volumes:
+volumes: []
   enabled: false
 # - name: foo
 #   secret:
@@ -91,8 +91,8 @@ volumes:
 #     optional: false
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts:
-  enabled: false
+volumeMounts: []
+#  enabled: false
 # - name: foo
 #   mountPath: "/etc/foo"
 #   readOnly: true
