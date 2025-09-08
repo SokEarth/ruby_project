@@ -1,14 +1,24 @@
 # salsify_project
 
-## Instructions that allow us to run your code
+## Instructions to run this code
 To deploy app from a github pipeline
-1. Clone this repo
-2. Create a .github/workflow/gifmachine.yaml file on github
-3. Copy pipeline code from the .github/workflow/gifmachine.yaml on this repo
-4. Commit the project and the workflow will run automatically
-5. It will deploy infrastructure on AWS and install two helm packages in the kubernetes cluster: External secret store and argocd.
-6. Create project on ArgoCD with url to the helm repo in this 
-7. In the end check the URL of the loadbalancer deployed by argocd
+1. Clone this repo.
+2. Create a .github/workflow/gifmachine.yaml file on github.
+3. Copy pipeline code from the .github/workflow/gifmachine.yaml on this repo.
+4. Commit the project and the workflow will run automatically and deploy infrastructure on AWS and install two helm packages in the kubernetes cluster: External secret store and argocd.
+   To get the url to log into argocd, run
+   ```
+   kubectl get svc -n argocd
+   ```
+6. To get the credentials to log into argocd, run
+   ```
+   kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode
+   ```
+7. Log in and create project on ArgoCD with url to the helm folder in this repo
+8. In the end check the URL of the loadbalancer deployed by argocd
+   ```
+   kubectl get svc -n default
+   ```
 
 ## A description of your solution noting interesting choices you made and why you made them
 1. I decided to use gitops to implement continuous deployment
