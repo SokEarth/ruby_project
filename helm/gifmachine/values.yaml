@@ -19,6 +19,8 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+serviceAccountName: app-service-account
+
 envSecrets:
   - name: DB_USERNAME
     secretName: app-db-secret
