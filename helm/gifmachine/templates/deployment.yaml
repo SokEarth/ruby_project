@@ -23,10 +23,10 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          # ports:
-          #   - name: http
-          #     containerPort: {{ .Values.service.port }}
-          #     protocol: TCP
+          ports:
+             - name: http
+               containerPort: 4567
+               protocol: TCP
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
