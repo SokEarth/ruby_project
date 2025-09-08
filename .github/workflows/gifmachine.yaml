@@ -93,7 +93,7 @@ jobs:
         run: terraform plan -out=tfplan
         working-directory: terraform
 
-      Terraform Apply
+      # Terraform Apply
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
         working-directory: terraform
