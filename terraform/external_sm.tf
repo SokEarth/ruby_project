@@ -4,6 +4,7 @@ resource "kubernetes_namespace" "external_secrets" {
 }
 
 resource "helm_release" "external_secrets" {
+  depends_on = [kubernetes_namespace.external_secrets]
   name = "external-secrets"
   repository = "https://charts.external-secrets.io"
   chart = "external-secrets"
@@ -14,6 +15,7 @@ resource "helm_release" "external_secrets" {
 
 
 resource "kubernetes_manifest" "aws_secretstore" {
+  depends_on = [helm_release.external_secrets]
   manifest = {
     apiVersion = "external-secrets.io/v1"
     kind = "SecretStore"
