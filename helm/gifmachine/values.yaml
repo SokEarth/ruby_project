@@ -50,7 +50,7 @@ envSecrets:
     secretName: app-db-secret
     secretKey: GIFMACHINE_PASSWORD
 
-resources: {}
+resources:
   limits:
     cpu: 100m
     memory: 128Mi
