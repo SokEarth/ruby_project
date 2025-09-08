@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "db" {
-  name = "db-app-url"
+  name = "db--url"
 }
 
 resource "aws_secretsmanager_secret_version" "db" {

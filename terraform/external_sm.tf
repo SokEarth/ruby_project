@@ -1,60 +1,16 @@
-# resource "kubernetes_namespace" "external_secrets" {
-#   depends_on = [aws_eks_cluster.eks]
-#   metadata { name = "external-secrets" }
-# }
+resource "kubernetes_namespace" "external_secrets" {
+  depends_on = [aws_eks_node_group.task_nodes]
+  metadata { name = "external-secrets" }
+}
 
-# resource "kubernetes_manifest" "external_secrets_operator" {
-#   # depends_on = [kubernetes_namespace.external_secrets]
-#   manifest = {
-#     apiVersion = "apps/v1beta1"
-#     kind = "Deployment"
-#     metadata = {
-#       name = "external-secrets"
-#       namespace = "external-secret"
-#     }
-#     spec = {
-#       replicas = 1
-#       selector = {
-#         matchLabels = {
-#           app = "external-secrets"
-#         }
-#       }
-#       template = {
-#         metadata = {
-#           labels = {
-#             app = "external-secrets"
-#           }
-#         }
-#         spec = {
-#           serviceAccountName = "external-secrets"
-#           containers = [{
-#             name = "external-secrets"
-#             image = "external-secrets/kubernetes-external-secrets:latest"
-#             resources = {
-#               requests = {
-#                 cpu = "50m",
-#                 memory = "100Mi"
-#               }, 
-#               limits = {
-#                 cpu = "100m",
-#                 memory = "200Mi"
-#               }
-#             }
-#           }]
-#         }
-#       }
-#     }
-#   }
-# }
+resource "helm_release" "external_secrets" {
+  name = "external-secrets"
+  repository = "https://charts.external-secrets.io"
+  chart = "external-secrets"
+  namespace = "external-secrets"
 
-# resource "helm_release" "external_secrets" {
-#   name = "external-secrets"
-#   repository = "https://charts.external-secrets.io"
-#   chart = "external-secrets"
-#   namespace = "external-secrets"
-
-#   create_namespace = true
-# }
+  create_namespace = true
+}
 
 
 resource "kubernetes_manifest" "aws_secretstore" {
