@@ -1,4 +1,4 @@
-# salsify_project
+# ruby_project
 
 ## Instructions to run this code
 To deploy app from a github pipeline
